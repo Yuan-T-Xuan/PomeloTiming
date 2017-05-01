@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="cn.edu.fudan.xuan.mytimemanagement.MainActivity">
+
+    <FrameLayout
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:id="@+id/imageBarView2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/bar01" />
+
+        <ImageView
+            android:id="@+id/imageBarView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/clip_source" />
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
+        android:text="Length of Each Working Period（Min.）"
+        android:layout_below="@+id/button_left"
+        android:layout_alignParentStart="true"
+        android:layout_height="30dp"
+        android:layout_marginTop="40dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:id="@+id/editTime1"
+        android:layout_below="@+id/textView1"
+        android:layout_alignParentStart="true"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:text="Length of Each Resting Period（Min.）"
+        android:layout_alignParentStart="true"
+        android:layout_height="30dp"
+        android:layout_below="@+id/editTime1" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:id="@+id/editTime2"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentStart="true"
+        android:inputType="number" />
+
+    <Button
+        android:text="APPLY"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/editTime2"
+        android:layout_alignParentStart="true"
+        android:id="@+id/button1" />
+
+    <Button
+        android:text="VIEW STAT"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/button2"
+        android:layout_below="@+id/button1"
+        android:layout_alignParentStart="true"
+        />
+
+    <Button
+        android:id="@+id/button_left"
+        android:layout_height="wrap_content"
+        android:text="Working"
+        android:textAllCaps="false"
+        android:layout_width="120dp"
+        android:layout_below="@+id/progressBar"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="40dp" />
+
+    <Button
+        android:id="@+id/button_right"
+        android:layout_height="wrap_content"
+        android:text="Resting"
+        android:textAllCaps="false"
+        android:layout_width="120dp"
+        android:layout_below="@+id/progressBar"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="40dp"/>
+
+</RelativeLayout>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#70636363">
+
+    <ListView android:id="@android:id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:drawSelectorOnTop="false"/>
+
+    <ImageView
+        android:id="@+id/wearpic"
+        android:layout_marginTop="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:src="@drawable/wearpic" />
+
+    <Button
+        android:id="@+id/button_enter"
+        android:layout_width="350dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:text="Start"
+        android:onClick="button_Enter"
+        android:layout_marginTop="420dp"
+        android:background="#50ffffff"
+        android:textColor="#FFFFFF"/>
+
+    <CheckBox
+        android:id="@+id/checkbox1"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:text="show next time"
+        android:layout_marginTop="480dp"
+        android:onClick="checkbox"
+        android:textColor="#FFFFFF"/>
+
+</FrameLayout>

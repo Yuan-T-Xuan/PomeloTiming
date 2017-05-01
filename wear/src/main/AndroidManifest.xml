@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="cn.edu.fudan.xuan.mytimemanagement">
+
+    <uses-feature android:name="android.hardware.type.watch" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/pomelo"
+        android:label="Pomelo"
+        android:supportsRtl="true"
+        android:theme="@android:style/Theme.DeviceDefault">
+        <uses-library android:name="com.google.android.wearable"
+            android:required="false" />
+        <uses-permission android:name="android.permission.WAKE_LOCK" />
+        <activity
+            android:name="cn.edu.fudan.xuan.mytimemanagement.MainActivity"
+            android:label="Pomelo">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
