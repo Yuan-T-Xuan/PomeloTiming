@@ -230,9 +230,9 @@ public class MainActivity extends AppCompatActivity implements DataApi.DataListe
                     Wearable.DataApi.putDataItem(mGoogleApiClient, request)
                             .setResultCallback(dataItemResult -> {
                                 PutDataMapRequest rPutDataMapRequest = PutDataMapRequest.create("/watch-button-state");
-                                if(mButtonL.getText().toString().equals("Working"))
+                                if(mButtonL.getText().toString().equals("Working") || mButtonL.getText().toString().equals("开始工作"))
                                     rPutDataMapRequest.getDataMap().putInt("watch-button-state", 1);
-                                else if(mButtonL.getText().toString().equals("Go Resting"))
+                                else if(mButtonL.getText().toString().equals("Go Resting") || mButtonL.getText().toString().equals("转至休息"))
                                     rPutDataMapRequest.getDataMap().putInt("watch-button-state", 2);
                                 else
                                     rPutDataMapRequest.getDataMap().putInt("watch-button-state", 3);
