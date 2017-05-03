@@ -20,6 +20,7 @@ import android.view.KeyEvent;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.wearable.DataApi;
@@ -35,6 +36,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.util.Date;
+import java.util.Locale;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements DataApi.DataListener {
@@ -87,6 +89,11 @@ public class MainActivity extends AppCompatActivity implements DataApi.DataListe
             super.handleMessage(msg);
         }
     };
+
+    private boolean useChinese() {
+        String language = Locale.getDefault().getLanguage();
+        return language.equals("zh");
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -167,6 +174,13 @@ public class MainActivity extends AppCompatActivity implements DataApi.DataListe
 
         settings = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         first = settings.getBoolean(FIRST_RUN, true);
+
+        if (useChinese()) {
+            ((TextView)findViewById(R.id.textView1)).setText("每段工作时间长度（分钟）");
+            ((TextView)findViewById(R.id.textView2)).setText("每段休息时间长度（分钟）");
+            mButton1.setText("应用设置");
+            mButton2.setText("查看统计");
+        }
         // Attention: 临时性屏蔽介绍页面！
         first = false;
         //
@@ -277,6 +291,10 @@ public class MainActivity extends AppCompatActivity implements DataApi.DataListe
         changeWatchButtonState(1);
         mButtonL.setText("Working");
         mButtonR.setText("Resting");
+        if(useChinese()) {
+            mButtonL.setText("开始工作");
+            mButtonR.setText("开始休息");
+        }
         mButtonL.setOnClickListener((view) -> {
             byebyeflag = false;
             //mProgress.setProgress(0);
@@ -290,7 +308,7 @@ public class MainActivity extends AppCompatActivity implements DataApi.DataListe
             // for debug only ...
             //storeRecord(new Date(), 0);
             Runnable ttmmpp = () -> {
-                String ip = Utils.getIPAddress(true);
+                String ip = "127.0.0.1"; // deprecated
                 String t = new Date().toString().replaceAll(" ", "+");
                 Log.d("PHONE-INFO", Imei);
                 Log.d("PHONE-INFO", String.valueOf(isWatchConnected));
@@ -326,6 +344,10 @@ public class MainActivity extends AppCompatActivity implements DataApi.DataListe
         changeWatchButtonState(2);
         mButtonL.setText("Go Resting");
         mButtonR.setText("Reset");
+        if(useChinese()) {
+            mButtonL.setText("转至休息");
+            mButtonR.setText("重置");
+        }
         mButtonL.setOnClickListener((view) -> {
             byebyeflag = true;
             try {
@@ -358,6 +380,10 @@ public class MainActivity extends AppCompatActivity implements DataApi.DataListe
         changeWatchButtonState(3);
         mButtonL.setText("Go Working");
         mButtonR.setText("Reset");
+        if(useChinese()) {
+            mButtonL.setText("转至工作");
+            mButtonR.setText("重置");
+        }
         mButtonL.setOnClickListener((view) -> {
             byebyeflag = true;
             try {
@@ -375,7 +401,7 @@ public class MainActivity extends AppCompatActivity implements DataApi.DataListe
             }
 
             Runnable ttmmpp = () -> {
-                String ip = Utils.getIPAddress(true);
+                String ip = "127.0.0.1"; // deprecated
                 String t = new Date().toString().replaceAll(" ", "+");
                 Log.d("PHONE-INFO", Imei);
                 Log.d("PHONE-INFO", String.valueOf(isWatchConnected));
@@ -499,7 +525,7 @@ public class MainActivity extends AppCompatActivity implements DataApi.DataListe
                 }
                 //
                 Runnable ttmmpp = () -> {
-                    String ip = Utils.getIPAddress(true);
+                    String ip = "127.0.0.1"; // deprecated
                     String t = new Date().toString().replaceAll(" ", "+");
                     Log.d("PHONE-INFO", Imei);
                     Log.d("PHONE-INFO", String.valueOf(isWatchConnected));
