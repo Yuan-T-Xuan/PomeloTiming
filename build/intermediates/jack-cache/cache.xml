@@ -2,94 +2,124 @@
 <items version="2" >
 
     <item
-        jar="/Users/xuan/MyDocs/PomeloTiming/wear/build/intermediates/exploded-aar/com.android.support/percent/25.2.0/jars/classes.jar"
+        jar="/Users/xuan/MyDocs/PomeloTiming/mobile/build/intermediates/exploded-aar/com.google.android.gms/play-services/7.8.87/jars/classes.jar"
         revision="24.0.2"
-        sha1="cc03ddac6017ba6366944c3eb01efc8751a00a6b">
-        <dex dex="/Users/xuan/MyDocs/PomeloTiming/wear/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-706bd82ef09707781198b55664b28b551ad45bd0.jar" />
+        sha1="845174ba52e225e6a2013c9bd3e481693796f2bc">
+        <dex dex="/Users/xuan/MyDocs/PomeloTiming/mobile/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-85e29b9067cd29bd3fb2860ec36c940a7e4ef00f.jar" />
     </item>
     <item
-        jar="/Users/xuan/Library/Android/sdk/extras/google/m2repository/com/google/android/wearable/wearable/2.0.1/wearable-2.0.1.jar"
+        jar="/Users/xuan/MyDocs/PomeloTiming/mobile/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/24.2.1/jars/classes.jar"
         revision="24.0.2"
-        sha1="2cd455acbbe3964cfaf50edf58cc3f4d5b136ea3">
-        <dex dex="/Users/xuan/MyDocs/PomeloTiming/wear/build/intermediates/transforms/preJackRuntimeLibraries/debug/jars/8000/40/wearable-2.0.1-d4905189149228c8b08a5e77262ea690a9b651d5.jar" />
+        sha1="94bc1dfb84dcc8b6f6f8f7cc726d7b2dd39c1574">
+        <dex dex="/Users/xuan/MyDocs/PomeloTiming/mobile/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-a22b4d6d0462e99be9eeb5dacc2296d9af4858c4.jar" />
     </item>
     <item
-        jar="/Users/xuan/MyDocs/PomeloTiming/wear/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.2.0/jars/classes.jar"
+        jar="/Users/xuan/MyDocs/PomeloTiming/mobile/src/main/java/TencentMapSDK_Raster_v_1.2.8_e45bcd0.jar"
         revision="24.0.2"
-        sha1="ee394a892dd21c03a528139c1e8d4e0e1264ac84">
-        <dex dex="/Users/xuan/MyDocs/PomeloTiming/wear/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-21de597f6a695a90e92a12cab45f49dfd882944e.jar" />
+        sha1="c93615f03a58ac94af5f7bfad16e4b90317ee817">
+        <dex dex="/Users/xuan/MyDocs/PomeloTiming/mobile/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/TencentMapSDK_Raster_v_1.2.8_e45bcd0-c488eb9bbf83a231e74e06420b972a07fe417877.jar" />
     </item>
     <item
-        jar="/Users/xuan/MyDocs/PomeloTiming/wear/build/intermediates/exploded-aar/com.google.android.support/wearable/2.0.1/jars/classes.jar"
+        jar="/Users/xuan/MyDocs/PomeloTiming/mobile/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/jars/classes.jar"
         revision="24.0.2"
-        sha1="82ee2b306014da82147b5b2f1881bf1260c1e2a9">
-        <dex dex="/Users/xuan/MyDocs/PomeloTiming/wear/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-3198bf96949f763640408b937661d3db8bc8a6ec.jar" />
+        sha1="43b2dba6b5a0b14527961b75329d0b90025f15ea">
+        <dex dex="/Users/xuan/MyDocs/PomeloTiming/mobile/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-383515326879a17286cbe470b5187329fa511dd5.jar" />
     </item>
     <item
-        jar="/Users/xuan/MyDocs/PomeloTiming/wear/build/intermediates/exploded-aar/com.android.support/support-compat/25.2.0/jars/classes.jar"
+        jar="/Users/xuan/MyDocs/PomeloTiming/mobile/build/intermediates/exploded-aar/com.android.support/multidex/1.0.1/jars/classes.jar"
         revision="24.0.2"
-        sha1="67eb33110dbacb46a48175b08ae0c96761d2c17d">
-        <dex dex="/Users/xuan/MyDocs/PomeloTiming/wear/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-d649ea8fa68b1929e3895a26f1a604966dd08e13.jar" />
+        sha1="78ea232052df889856dcb7b7b542707c89bb3bfb">
+        <dex dex="/Users/xuan/MyDocs/PomeloTiming/mobile/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-d302b74fb8097444e216a072d020e9a2dee3d0c7.jar" />
     </item>
     <item
-        jar="/Users/xuan/MyDocs/PomeloTiming/wear/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/25.2.0/jars/classes.jar"
+        jar="/Users/xuan/Library/Android/sdk/extras/m2repository/com/android/support/constraint/constraint-layout-solver/1.0.2/constraint-layout-solver-1.0.2.jar"
         revision="24.0.2"
-        sha1="152de8da301561dcb0946471697a420d8f7a68c5">
-        <dex dex="/Users/xuan/MyDocs/PomeloTiming/wear/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-8aff4dc2cc4544a50dd1a66a9f78b710a83f16d5.jar" />
+        sha1="b9cd8fc6bd15cb915735d34535db30ece0c44603">
+        <dex dex="/Users/xuan/MyDocs/PomeloTiming/mobile/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/constraint-layout-solver-1.0.2-f17826b0968f1e639ea79140e0352247f45fee2e.jar" />
     </item>
     <item
-        jar="/Users/xuan/MyDocs/PomeloTiming/wear/build/intermediates/exploded-aar/com.google.android.gms/play-services-wearable/7.8.87/jars/classes.jar"
+        jar="/Users/xuan/MyDocs/PomeloTiming/mobile/build/intermediates/exploded-aar/com.android.support/support-core-ui/24.2.1/jars/libs/internal_impl-24.2.1.jar"
         revision="24.0.2"
-        sha1="3bb1df2b6b46b7ee348069b3111b16f9c2d97089">
-        <dex dex="/Users/xuan/MyDocs/PomeloTiming/wear/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-c443cd67394a091c2779bcec20df100003b7d49d.jar" />
+        sha1="867dad63c33388ff8c7644b236579355036d075f">
+        <dex dex="/Users/xuan/MyDocs/PomeloTiming/mobile/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/internal_impl-24.2.1-a742c5803744885066a77538b9109c2e14265ce6.jar" />
     </item>
     <item
-        jar="/Users/xuan/MyDocs/PomeloTiming/wear/build/intermediates/exploded-aar/com.android.support/support-fragment/25.2.0/jars/classes.jar"
+        jar="/Users/xuan/MyDocs/PomeloTiming/mobile/build/intermediates/exploded-aar/com.android.support/support-core-utils/24.2.1/jars/libs/internal_impl-24.2.1.jar"
         revision="24.0.2"
-        sha1="8fe8a8f77d651982ce5e18f6187dc4daf914ac57">
-        <dex dex="/Users/xuan/MyDocs/PomeloTiming/wear/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-dc16c288f9477c42c4624c0b120263c50765a899.jar" />
+        sha1="935a969265b2a166b2d20415423f5f6e90fe16e0">
+        <dex dex="/Users/xuan/MyDocs/PomeloTiming/mobile/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/internal_impl-24.2.1-4cd93c27802add78a5c8e35f4faf572e96799d70.jar" />
     </item>
     <item
-        jar="/Users/xuan/MyDocs/PomeloTiming/wear/build/intermediates/exploded-aar/com.android.support/support-v4/25.2.0/jars/classes.jar"
+        jar="/Users/xuan/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/24.2.1/support-annotations-24.2.1.jar"
+        revision="24.0.2"
+        sha1="8de3aafecbdf98a61db6427f008f2d515bcd2544">
+        <dex dex="/Users/xuan/MyDocs/PomeloTiming/mobile/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/support-annotations-24.2.1-0c54499631306309e889af69c5070a6a8490a504.jar" />
+    </item>
+    <item
+        jar="/Users/xuan/MyDocs/PomeloTiming/mobile/build/intermediates/exploded-aar/com.android.support/support-media-compat/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        revision="24.0.2"
+        sha1="fbf8da429efd5ad21e02e3e5ecaa1efc4167878d">
+        <dex dex="/Users/xuan/MyDocs/PomeloTiming/mobile/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/internal_impl-24.2.1-9668127b87500c1f367d3d45a9a6cc25164863d7.jar" />
+    </item>
+    <item
+        jar="/Users/xuan/MyDocs/PomeloTiming/mobile/build/intermediates/exploded-aar/com.android.support/support-compat/24.2.1/jars/classes.jar"
+        revision="24.0.2"
+        sha1="0ecb4b595fa0f0f8018a149ace3ea6525624f94e">
+        <dex dex="/Users/xuan/MyDocs/PomeloTiming/mobile/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-b8e4c242361a7e8bcc60e19d7109edcd01de11d6.jar" />
+    </item>
+    <item
+        jar="/Users/xuan/MyDocs/PomeloTiming/mobile/build/intermediates/exploded-aar/com.android.support.constraint/constraint-layout/1.0.2/jars/classes.jar"
+        revision="24.0.2"
+        sha1="44ee06abb66da30f5855e6bf54574e64cdcd982a">
+        <dex dex="/Users/xuan/MyDocs/PomeloTiming/mobile/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-6abbd9f807a6da8bb8ab5d03ff6d9b317161573e.jar" />
+    </item>
+    <item
+        jar="/Users/xuan/MyDocs/PomeloTiming/mobile/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.1/jars/classes.jar"
+        revision="24.0.2"
+        sha1="b9a1ac78ad7ef3abedc4a4b30cd92bcacb939d1f">
+        <dex dex="/Users/xuan/MyDocs/PomeloTiming/mobile/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-350ffb337051c92ff241bc05b2087c79f9dac7a2.jar" />
+    </item>
+    <item
+        jar="/Users/xuan/MyDocs/PomeloTiming/mobile/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        revision="24.0.2"
+        sha1="5f64d657e838e8375135c0f6057a7ff8fab6a50e">
+        <dex dex="/Users/xuan/MyDocs/PomeloTiming/mobile/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/internal_impl-24.2.1-3794d073fe1e1d217f3b28f32ef5e30ea52d244f.jar" />
+    </item>
+    <item
+        jar="/Users/xuan/MyDocs/PomeloTiming/mobile/build/intermediates/exploded-aar/com.android.support/support-v4/24.2.1/jars/classes.jar"
         revision="24.0.2"
         sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="/Users/xuan/MyDocs/PomeloTiming/wear/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-bf7b56e9d2943905282a810d5d21002e1e06de5d.jar" />
+        <dex dex="/Users/xuan/MyDocs/PomeloTiming/mobile/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-6dbd0dcb32563a124caac636ec346b2a754cc071.jar" />
     </item>
     <item
-        jar="/Users/xuan/MyDocs/PomeloTiming/wear/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.8.87/jars/classes.jar"
+        jar="/Users/xuan/MyDocs/PomeloTiming/mobile/build/intermediates/exploded-aar/com.android.support/support-compat/24.2.1/jars/libs/internal_impl-24.2.1.jar"
         revision="24.0.2"
-        sha1="53cc87b3e07edb090a08db70856bc9726288681e">
-        <dex dex="/Users/xuan/MyDocs/PomeloTiming/wear/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-28e29ff2783ffe4cda766ee9cbb144d455a77ed8.jar" />
+        sha1="7e4389bd133359a2ff88623ff1e4ff93d6e6f780">
+        <dex dex="/Users/xuan/MyDocs/PomeloTiming/mobile/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/internal_impl-24.2.1-20b2ecbc3c66a533f5b0b9d8e80d22c0247aec7e.jar" />
     </item>
     <item
-        jar="/Users/xuan/MyDocs/PomeloTiming/wear/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.2.0/jars/classes.jar"
+        jar="/Users/xuan/MyDocs/PomeloTiming/mobile/build/intermediates/exploded-aar/com.android.support/support-core-utils/24.2.1/jars/classes.jar"
         revision="24.0.2"
-        sha1="fa0446a14ed5dd3725047d6399ffea771a564b30">
-        <dex dex="/Users/xuan/MyDocs/PomeloTiming/wear/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-5c8da61bd420fcc5189b7fdb8ecdbf117c978ef3.jar" />
+        sha1="9c4c3bc902450c39ed54de170db4fb12aea20a35">
+        <dex dex="/Users/xuan/MyDocs/PomeloTiming/mobile/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-078bce08f65c7005c676c2f823150e0b2f904cf7.jar" />
     </item>
     <item
-        jar="/Users/xuan/Library/Android/sdk/platforms/android-24/optional/org.apache.http.legacy.jar"
+        jar="/Users/xuan/MyDocs/PomeloTiming/mobile/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/24.2.1/jars/classes.jar"
         revision="24.0.2"
-        sha1="fb7023e781abb70ed1b0442eb611fbed295cae84">
-        <dex dex="/Users/xuan/MyDocs/PomeloTiming/wear/build/intermediates/transforms/preJackRuntimeLibraries/debug/jars/8000/40/org.apache.http.legacy-9d2e1a47b470e3a5bd22bf77e06080fb2c014227.jar" />
+        sha1="d5c731fc64c03dfe04d51134955b483551c35849">
+        <dex dex="/Users/xuan/MyDocs/PomeloTiming/mobile/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-e9d4a53eaaa356b7f03a701e247d436418076715.jar" />
     </item>
     <item
-        jar="/Users/xuan/MyDocs/PomeloTiming/wear/build/intermediates/exploded-aar/com.android.support/support-core-utils/25.2.0/jars/classes.jar"
+        jar="/Users/xuan/MyDocs/PomeloTiming/mobile/build/intermediates/exploded-aar/com.android.support/support-core-ui/24.2.1/jars/classes.jar"
         revision="24.0.2"
-        sha1="e820b7be8c035dd522da4bc822e8a76c8e27921a">
-        <dex dex="/Users/xuan/MyDocs/PomeloTiming/wear/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-2d2cf849b7d909eb90314d5f3e0471f80ef2267f.jar" />
+        sha1="e7f3132168957eefc46229fc32c3bd464642b71e">
+        <dex dex="/Users/xuan/MyDocs/PomeloTiming/mobile/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-11d942921669597387ae9862c5605c66d66ba72a.jar" />
     </item>
     <item
-        jar="/Users/xuan/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/25.2.0/support-annotations-25.2.0.jar"
+        jar="/Users/xuan/MyDocs/PomeloTiming/mobile/build/intermediates/exploded-aar/com.android.support/support-media-compat/24.2.1/jars/classes.jar"
         revision="24.0.2"
-        sha1="4a5a82a027706397fff621b22fd6fa796e91d7c5">
-        <dex dex="/Users/xuan/MyDocs/PomeloTiming/wear/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/support-annotations-25.2.0-6904408754c4abfcc45a0f653d969ee4aa9d8d63.jar" />
-    </item>
-    <item
-        jar="/Users/xuan/Library/Android/sdk/platforms/android-24/android.jar"
-        revision="24.0.2"
-        sha1="d49cc0972df7adf495d3ad3d0cf71c0ec517ace4">
-        <dex dex="/Users/xuan/MyDocs/PomeloTiming/wear/build/intermediates/transforms/preJackRuntimeLibraries/debug/jars/8000/40/android-73006a5f41be18863fbbdf66cb31019447b38b48.jar" />
+        sha1="09b462bbcb77650284bd6614f1a32f360ef369f8">
+        <dex dex="/Users/xuan/MyDocs/PomeloTiming/mobile/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-453f7abc5cca861483d737a85ccb059273f43999.jar" />
     </item>
 
 </items>

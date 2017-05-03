@@ -74,13 +74,20 @@
         android:id="@+id/button1" />
 
     <Button
-        android:text="VIEW STAT"
+        android:id="@+id/button3"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:id="@+id/button2"
-        android:layout_below="@+id/button1"
         android:layout_alignParentStart="true"
-        />
+        android:layout_below="@+id/button2"
+        android:text="SHOW MAP" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="VIEW STAT"
+        android:layout_below="@+id/button1"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:id="@+id/button_left"

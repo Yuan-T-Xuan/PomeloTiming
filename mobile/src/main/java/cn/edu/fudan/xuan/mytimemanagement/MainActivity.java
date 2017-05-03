@@ -160,6 +160,11 @@ public class MainActivity extends AppCompatActivity implements DataApi.DataListe
             Intent intent = new Intent(this, StatActivity.class);
             startActivity(intent);
         });
+        Button button3 = (Button) findViewById(R.id.button3);
+        button3.setOnClickListener((view) -> {
+            Intent intent = new Intent(this, XyMapActivity.class);
+            startActivity(intent);
+        });
 
         // database
         db = SQLiteDatabase.openOrCreateDatabase(getFilesDir().getPath() + "/my_db.db", null);
