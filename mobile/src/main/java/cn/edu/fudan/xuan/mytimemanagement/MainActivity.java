@@ -1,16 +1,21 @@
 package cn.edu.fudan.xuan.mytimemanagement;
 
+import android.Manifest;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.graphics.drawable.ClipDrawable;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -41,7 +46,7 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements DataApi.DataListener {
 
-    public static MainActivity instance=null;
+    public static MainActivity instance = null;
 
     private MainActivity theActivity = this;
     NotificationCompat.Builder mNotifiBuilder;
@@ -55,11 +60,12 @@ public class MainActivity extends AppCompatActivity implements DataApi.DataListe
     private EditText textBox1, textBox2;
     private long workTime = 20, restTime = 5;
     private boolean byebyeflag = false;
+    private LocationManager locationManager = null;
 
     public static final String PREFS_NAME = "MyPrefsFile";
     public static final String FIRST_RUN = "first";
     private boolean first;
-    public boolean neverseeagain=true;
+    public boolean neverseeagain = true;
     public SharedPreferences settings;
 
     private String Imei;
@@ -70,20 +76,20 @@ public class MainActivity extends AppCompatActivity implements DataApi.DataListe
         @Override
         public void handleMessage(Message msg) {
             // newly added
-            if(msg.what == -1)
+            if (msg.what == -1)
                 toState01();
-            else if(msg.what == -2)
+            else if (msg.what == -2)
                 toState02();
-            else if(msg.what == -3)
+            else if (msg.what == -3)
                 toState03();
-            //
-            else if(msg.what == 1) {
+                //
+            else if (msg.what == 1) {
                 mButtonL.callOnClick();
-            } else if(msg.what == 2) {
+            } else if (msg.what == 2) {
                 mButtonR.callOnClick();
-            } else if(msg.what == 0) {
+            } else if (msg.what == 0) {
                 mImageDrawable.setLevel(0);
-            } else if(msg.what <= 10000){
+            } else if (msg.what <= 10000) {
                 mImageDrawable.setLevel(msg.what);
             }
             super.handleMessage(msg);
@@ -99,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements DataApi.DataListe
     protected void onCreate(Bundle savedInstanceState) {
         System.out.println("here is create");
 
-        instance=this;
+        instance = this;
 
         super.onCreate(savedInstanceState);
         //
@@ -131,6 +137,7 @@ public class MainActivity extends AppCompatActivity implements DataApi.DataListe
                         Log.d(TAG, "onConnected: " + connectionHint);
                         Wearable.DataApi.addListener(mGoogleApiClient, theActivity);
                     }
+
                     @Override
                     public void onConnectionSuspended(int cause) {
                         Log.d(TAG, "onConnectionSuspended: " + cause);
@@ -146,6 +153,7 @@ public class MainActivity extends AppCompatActivity implements DataApi.DataListe
                 .setContentTitle("NOW REST :)")
                 .setContentText("Your have just finished a working period.");
 
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         toState01();
 
         // restore time settings
@@ -170,7 +178,7 @@ public class MainActivity extends AppCompatActivity implements DataApi.DataListe
         db = SQLiteDatabase.openOrCreateDatabase(getFilesDir().getPath() + "/my_db.db", null);
         //Log.d(TAG + "h", getFilesDir().getPath());
         String toCreateTable = "create table records(_id integer primary key autoincrement, year integer, " +
-                "month integer, date integer, hour integer, minute integer, length integer)";
+                "month integer, date integer, hour integer, minute integer, length integer, lat double, lon double)";
         try {
             db.execSQL(toCreateTable);
         } catch (SQLiteException e) {
@@ -181,15 +189,15 @@ public class MainActivity extends AppCompatActivity implements DataApi.DataListe
         first = settings.getBoolean(FIRST_RUN, true);
 
         if (useChinese()) {
-            ((TextView)findViewById(R.id.textView1)).setText("每段工作时间长度（分钟）");
-            ((TextView)findViewById(R.id.textView2)).setText("每段休息时间长度（分钟）");
+            ((TextView) findViewById(R.id.textView1)).setText("每段工作时间长度（分钟）");
+            ((TextView) findViewById(R.id.textView2)).setText("每段休息时间长度（分钟）");
             mButton1.setText("应用设置");
             mButton2.setText("查看统计");
         }
         // Attention: 临时性屏蔽介绍页面！
         first = false;
         //
-        if(first){
+        if (first) {
             Intent intro_intent = new Intent(this, IntroActivity.class);
             startActivity(intro_intent);
 
@@ -207,15 +215,15 @@ public class MainActivity extends AppCompatActivity implements DataApi.DataListe
     }
 
     @Override
-    protected void onStop(){
+    protected void onStop() {
         super.onStop();
-       // System.out.println("here's stop");
-       // System.out.println(neverseeagain);
-        if(!neverseeagain){
+        // System.out.println("here's stop");
+        // System.out.println(neverseeagain);
+        if (!neverseeagain) {
             SharedPreferences.Editor editor = settings.edit();
             editor.putBoolean(FIRST_RUN, true);
             editor.commit();
-        }else{
+        } else {
             SharedPreferences.Editor editor = settings.edit();
             editor.putBoolean(FIRST_RUN, false);
             editor.commit();
@@ -235,9 +243,9 @@ public class MainActivity extends AppCompatActivity implements DataApi.DataListe
                     Wearable.DataApi.putDataItem(mGoogleApiClient, request)
                             .setResultCallback(dataItemResult -> {
                                 PutDataMapRequest rPutDataMapRequest = PutDataMapRequest.create("/watch-button-state");
-                                if(mButtonL.getText().toString().equals("Working") || mButtonL.getText().toString().equals("开始工作"))
+                                if (mButtonL.getText().toString().equals("Working") || mButtonL.getText().toString().equals("开始工作"))
                                     rPutDataMapRequest.getDataMap().putInt("watch-button-state", 1);
-                                else if(mButtonL.getText().toString().equals("Go Resting") || mButtonL.getText().toString().equals("转至休息"))
+                                else if (mButtonL.getText().toString().equals("Go Resting") || mButtonL.getText().toString().equals("转至休息"))
                                     rPutDataMapRequest.getDataMap().putInt("watch-button-state", 2);
                                 else
                                     rPutDataMapRequest.getDataMap().putInt("watch-button-state", 3);
@@ -275,7 +283,7 @@ public class MainActivity extends AppCompatActivity implements DataApi.DataListe
 
     private void setProgress(float thenum) {
         Log.d(TAG, "received set-progress");
-        int progress = (int)(thenum * 10000.0);
+        int progress = (int) (thenum * 10000.0);
         if (progress > 2) {
             Message msg = mHandler.obtainMessage();
             msg.what = progress;
@@ -296,7 +304,7 @@ public class MainActivity extends AppCompatActivity implements DataApi.DataListe
         changeWatchButtonState(1);
         mButtonL.setText("Working");
         mButtonR.setText("Resting");
-        if(useChinese()) {
+        if (useChinese()) {
             mButtonL.setText("开始工作");
             mButtonR.setText("开始休息");
         }
@@ -311,7 +319,7 @@ public class MainActivity extends AppCompatActivity implements DataApi.DataListe
                 e.printStackTrace();
             }
             // for debug only ...
-            //storeRecord(new Date(), 0);
+            storeRecord(new Date(), 0);
             Runnable ttmmpp = () -> {
                 String ip = "127.0.0.1"; // deprecated
                 String t = new Date().toString().replaceAll(" ", "+");
@@ -320,8 +328,8 @@ public class MainActivity extends AppCompatActivity implements DataApi.DataListe
                 Log.d("PHONE-INFO", ver);
                 Log.d("PHONE-INFO", ip);
                 Log.d("PHONE-INFO", t);
-                HttpGet httpGet = new HttpGet("http://119.28.64.70:5000/watchapp/"+Imei+"%23"+String.valueOf(isWatchConnected)+"%23"+ver+"%23"+ip+"%23"+t);
-                Log.d("PHONE-INFO", "http://119.28.64.70:5000/watchapp/"+Imei+"%23"+String.valueOf(isWatchConnected)+"%23"+ver+"%23"+ip+"%23"+t);
+                HttpGet httpGet = new HttpGet("http://119.28.64.70:5000/watchapp/" + Imei + "%23" + String.valueOf(isWatchConnected) + "%23" + ver + "%23" + ip + "%23" + t);
+                Log.d("PHONE-INFO", "http://119.28.64.70:5000/watchapp/" + Imei + "%23" + String.valueOf(isWatchConnected) + "%23" + ver + "%23" + ip + "%23" + t);
                 HttpClient httpClient = new DefaultHttpClient();
                 try {
                     httpClient.execute(httpGet);
@@ -330,7 +338,7 @@ public class MainActivity extends AppCompatActivity implements DataApi.DataListe
                     e.printStackTrace();
                 }
             };
-            new Thread (ttmmpp, String.valueOf(new Random().nextInt())).start();
+            new Thread(ttmmpp, String.valueOf(new Random().nextInt())).start();
         });
         mButtonR.setOnClickListener((view) -> {
             byebyeflag = false;
@@ -349,7 +357,7 @@ public class MainActivity extends AppCompatActivity implements DataApi.DataListe
         changeWatchButtonState(2);
         mButtonL.setText("Go Resting");
         mButtonR.setText("Reset");
-        if(useChinese()) {
+        if (useChinese()) {
             mButtonL.setText("转至休息");
             mButtonR.setText("重置");
         }
@@ -385,7 +393,7 @@ public class MainActivity extends AppCompatActivity implements DataApi.DataListe
         changeWatchButtonState(3);
         mButtonL.setText("Go Working");
         mButtonR.setText("Reset");
-        if(useChinese()) {
+        if (useChinese()) {
             mButtonL.setText("转至工作");
             mButtonR.setText("重置");
         }
@@ -413,8 +421,8 @@ public class MainActivity extends AppCompatActivity implements DataApi.DataListe
                 Log.d("PHONE-INFO", ver);
                 Log.d("PHONE-INFO", ip);
                 Log.d("PHONE-INFO", t);
-                HttpGet httpGet = new HttpGet("http://119.28.64.70:5000/watchapp/"+Imei+"%23"+String.valueOf(isWatchConnected)+"%23"+ver+"%23"+ip+"%23"+t);
-                Log.d("PHONE-INFO", "http://119.28.64.70:5000/watchapp/"+Imei+"%23"+String.valueOf(isWatchConnected)+"%23"+ver+"%23"+ip+"%23"+t);
+                HttpGet httpGet = new HttpGet("http://119.28.64.70:5000/watchapp/" + Imei + "%23" + String.valueOf(isWatchConnected) + "%23" + ver + "%23" + ip + "%23" + t);
+                Log.d("PHONE-INFO", "http://119.28.64.70:5000/watchapp/" + Imei + "%23" + String.valueOf(isWatchConnected) + "%23" + ver + "%23" + ip + "%23" + t);
                 HttpClient httpClient = new DefaultHttpClient();
                 try {
                     httpClient.execute(httpGet);
@@ -423,7 +431,7 @@ public class MainActivity extends AppCompatActivity implements DataApi.DataListe
                     e.printStackTrace();
                 }
             };
-            new Thread (ttmmpp, String.valueOf(new Random().nextInt())).start();
+            new Thread(ttmmpp, String.valueOf(new Random().nextInt())).start();
 
         });
         mButtonR.setOnClickListener((view) -> {
@@ -443,14 +451,16 @@ public class MainActivity extends AppCompatActivity implements DataApi.DataListe
         workTime = Integer.parseInt(textBox1.getText().toString());
         restTime = Integer.parseInt(textBox2.getText().toString());
         //
-        workTime = workTime * 60; restTime = restTime * 60;
+        workTime = workTime * 60;
+        restTime = restTime * 60;
         SharedPreferences sharedPref = theActivity.getSharedPreferences(preference_file_key, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putInt("workTime", workTime);
         editor.putInt("restTime", restTime);
         editor.apply();
         //
-        this.workTime = workTime; this.restTime = restTime;
+        this.workTime = workTime;
+        this.restTime = restTime;
         //
         String message2show = "Work: " + textBox1.getText().toString() + "\nRest: " + textBox2.getText().toString();
         new AlertDialog.Builder(this).setTitle("Set Successful").setMessage(message2show).setPositiveButton("OK", null).show();
@@ -458,12 +468,23 @@ public class MainActivity extends AppCompatActivity implements DataApi.DataListe
 
     private boolean storeRecord(Date currDate, int length) {
         try {
+            double lat = 0.00, lon = 0.00;
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                Log.d("PERM DEN", "...");
+            }
+            Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            if (location != null) {
+                lat = location.getLatitude();
+                lon = location.getLongitude();
+            }
             //db.insert("records", null, cValue);
-            String insert_sql = String.format("INSERT INTO records(date,month,hour,length,minute,year) VALUES (%d,%d,%d,%d,%d,%d)",
-                    currDate.getDate(), currDate.getMonth(), currDate.getHours(), length, currDate.getMinutes(), currDate.getYear());
+            String insert_sql = String.format("INSERT INTO records(date,month,hour,length,minute,year,lat,lon) VALUES (%d,%d,%d,%d,%d,%d,%f,%f)",
+                    currDate.getDate(), currDate.getMonth(), currDate.getHours(), length, currDate.getMinutes(), currDate.getYear(), lat, lon);
             Log.d(TAG, insert_sql);
             db.execSQL(insert_sql);
         } catch (Exception e) {
+            Log.d("ANYTHING", "WRONG?");
+            e.printStackTrace();
             return false;
         }
         return true;
