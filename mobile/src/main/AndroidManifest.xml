@@ -30,8 +30,8 @@
         </activity>
         <activity android:name=".StatActivity" />
         <activity android:name=".IntroActivity" />
-        <activity android:name=".XyMapActivity"></activity>
+        <activity android:name=".XyMapActivity" />
+        <activity android:name=".XyListActivity"></activity>
     </application>
 
 </manifest>
-

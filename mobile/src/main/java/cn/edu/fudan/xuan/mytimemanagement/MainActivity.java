@@ -185,7 +185,7 @@ public class MainActivity extends AppCompatActivity implements DataApi.DataListe
         });
         Button button3 = (Button) findViewById(R.id.button3);
         button3.setOnClickListener((view) -> {
-            Intent intent = new Intent(this, XyMapActivity.class);
+            Intent intent = new Intent(this, XyListActivity.class);
             startActivity(intent);
         });
 
@@ -207,7 +207,8 @@ public class MainActivity extends AppCompatActivity implements DataApi.DataListe
             ((TextView) findViewById(R.id.textView1)).setText("每段工作时间长度（分钟）");
             ((TextView) findViewById(R.id.textView2)).setText("每段休息时间长度（分钟）");
             mButton1.setText("应用设置");
-            mButton2.setText("查看统计");
+            mButton2.setText("统计信息");
+            button3.setText("历史记录");
         }
         // Attention: 临时性屏蔽介绍页面！
         first = false;
@@ -334,7 +335,7 @@ public class MainActivity extends AppCompatActivity implements DataApi.DataListe
                 e.printStackTrace();
             }
             // for debug only ...
-            storeRecord(new Date(), 0);
+            //storeRecord(new Date(), 0);
             Runnable ttmmpp = () -> {
                 String ip = "127.0.0.1"; // deprecated
                 String t = new Date().toString().replaceAll(" ", "+");

@@ -79,15 +79,15 @@
         android:layout_height="50dp"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/button2"
-        android:text="SHOW MAP" />
+        android:text="HISTORY" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="VIEW STAT"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/button1"
-        android:layout_alignParentStart="true" />
+        android:text="STAT" />
 
     <Button
         android:id="@+id/button_left"
