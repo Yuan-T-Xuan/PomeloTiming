@@ -17,6 +17,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
@@ -109,12 +110,26 @@ public class MainActivity extends AppCompatActivity implements DataApi.DataListe
 
         super.onCreate(savedInstanceState);
         //
-        Imei = ((TelephonyManager) getSystemService(TELEPHONY_SERVICE)).getDeviceId();
-        ver = Build.VERSION.RELEASE;
+        int pCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE);
 
-        //Log.d("PHONE-INFO", Imei);
+        if (pCheck != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE}, 2377);
+            pCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE);
+            if (pCheck == PackageManager.PERMISSION_GRANTED) {
+                Imei = ((TelephonyManager) getSystemService(TELEPHONY_SERVICE)).getDeviceId();
+                ver = Build.VERSION.RELEASE;
+            } else {
+                Imei = "00000000000000";
+                ver = "0.0";
+            }
+        } else {
+            Imei = ((TelephonyManager) getSystemService(TELEPHONY_SERVICE)).getDeviceId();
+            ver = Build.VERSION.RELEASE;
+        }
+
+        Log.d("PHONE-INFO", Imei);
         //Log.d("PHONE-INFO", String.valueOf(isWatchConnected));
-        //Log.d("PHONE-INFO", ver);
+        Log.d("PHONE-INFO", ver);
         //
         setContentView(R.layout.activity_main);
         Button mButton1 = (Button) findViewById(R.id.button1);
@@ -182,7 +197,7 @@ public class MainActivity extends AppCompatActivity implements DataApi.DataListe
         try {
             db.execSQL(toCreateTable);
         } catch (SQLiteException e) {
-            // do nothing ...
+            e.printStackTrace();
         }
 
         settings = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
@@ -469,15 +484,26 @@ public class MainActivity extends AppCompatActivity implements DataApi.DataListe
     private boolean storeRecord(Date currDate, int length) {
         try {
             double lat = 0.00, lon = 0.00;
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                Log.d("PERM DEN", "...");
+            int pCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
+            if (pCheck != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1977);
+                pCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
+                if (pCheck == PackageManager.PERMISSION_GRANTED) {
+                    Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                    if (location != null) {
+                        lat = location.getLatitude();
+                        lon = location.getLongitude();
+                    }
+                } else {
+                    // ...
+                }
+            } else {
+                Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                if (location != null) {
+                    lat = location.getLatitude();
+                    lon = location.getLongitude();
+                }
             }
-            Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-            if (location != null) {
-                lat = location.getLatitude();
-                lon = location.getLongitude();
-            }
-            //db.insert("records", null, cValue);
             String insert_sql = String.format("INSERT INTO records(date,month,hour,length,minute,year,lat,lon) VALUES (%d,%d,%d,%d,%d,%d,%f,%f)",
                     currDate.getDate(), currDate.getMonth(), currDate.getHours(), length, currDate.getMinutes(), currDate.getYear(), lat, lon);
             Log.d(TAG, insert_sql);
