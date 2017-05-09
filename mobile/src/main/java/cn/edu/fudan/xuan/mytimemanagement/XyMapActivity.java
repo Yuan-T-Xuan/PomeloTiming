@@ -16,11 +16,13 @@ public class XyMapActivity extends MapActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        double lat = getIntent().getDoubleExtra("cn.edu.fudan.xuan.LAT", 0.0);
+        double lon = getIntent().getDoubleExtra("cn.edu.fudan.xuan.LON", 0.0);
         setContentView(R.layout.activity_map);
         mapView = (MapView)findViewById(R.id.mapview) ;
         TencentMap tencentMap = mapView.getMap();
-        tencentMap.setCenter(new LatLng(34.4, 113.4));
-        tencentMap.setZoom(5);
+        tencentMap.setCenter(new LatLng(lat, lon));
+        tencentMap.setZoom(14);
         tencentMap.setOnMarkerClickListener(new TencentMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker arg0) {
@@ -35,7 +37,7 @@ public class XyMapActivity extends MapActivity {
             }
         });
 
-        Marker marker = tencentMap.addMarker(new MarkerOptions().position(new LatLng(39, 116))
+        Marker marker = tencentMap.addMarker(new MarkerOptions().position(new LatLng(lat, lon))
                 //.title("2012-09-27 03：56").snippet("xcvghgtrdcvb nhgfcvbh")
                 .icon(BitmapDescriptorFactory.defaultMarker()));
     }

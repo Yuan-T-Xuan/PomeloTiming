@@ -27,6 +27,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.wearable.DataApi;
@@ -225,6 +226,10 @@ public class MainActivity extends AppCompatActivity implements DataApi.DataListe
 
         switch (keyCode) {
             case KeyEvent.KEYCODE_BACK:
+                if (useChinese())
+                    Toast.makeText(this, "请使用 Home 键离开本窗口", Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(this, "Please push Home Button to leave this app.", Toast.LENGTH_SHORT).show();
                 return true;
         }
         return super.onKeyDown(keyCode, event);

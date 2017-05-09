@@ -1,9 +1,11 @@
 package cn.edu.fudan.xuan.mytimemanagement;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -42,24 +44,40 @@ public class XyListActivity extends AppCompatActivity {
             cursor.moveToNext();
         }
         cursor.close();
-        db.close();
 
         final ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_expandable_list_item_1, list);
         listview.setAdapter(adapter);
 
         listview.setOnItemClickListener((parent, view, position, id) -> {
-            /*
-            final String item = (String) parent.getItemAtPosition(position);
-            view.animate().setDuration(2000).alpha(0)
-                    .withEndAction(new Runnable() {
-                        @Override
-                        public void run() {
-                            list.remove(item);
-                            adapter.notifyDataSetChanged();
-                            view.setAlpha(1);
-                        }
-                    });
-            */
+            String item = (String) parent.getItemAtPosition(position);
+            // e.g. 2017/ 4/ 9 12:37
+            item = item.replace('/', ' ').replace(':', ' ').replace("  ", " ");
+            String ts[] = item.split(" ");
+            String q = "SELECT lat, lon FROM records WHERE";
+            q += " year = " + (Integer.parseInt(ts[0])-1900);
+            q += " AND month = " + ts[1];
+            q += " AND date = " + ts[2];
+            q += " AND hour = " + ts[3];
+            q += " AND minute = " + ts[4];
+            Cursor cur = db.rawQuery(q, null);
+            cur.moveToFirst();
+            double lat = cur.getDouble(0);
+            double lon = cur.getDouble(1);
+            cur.close();
+            if(lat == 0 || lon == 0) {
+                new AlertDialog.Builder(this).setTitle("NO Location Info")
+                        .setMessage("User did not save location info during this record.")
+                        .setNegativeButton("Close", (dialog, which) -> {
+                            //do nothing - it will close on its own
+                        })
+                        .show();
+            } else {
+                Log.d("LOC INFO", " " + lat + " " + lon);
+                Intent intent = new Intent(this, XyMapActivity.class);
+                intent.putExtra("cn.edu.fudan.xuan.LAT", lat);
+                intent.putExtra("cn.edu.fudan.xuan.LON", lon);
+                startActivity(intent);
+            }
         });
     }
 
