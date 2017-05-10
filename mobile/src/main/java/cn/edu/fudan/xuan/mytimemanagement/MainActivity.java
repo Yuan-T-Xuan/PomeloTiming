@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.graphics.drawable.ClipDrawable;
@@ -30,6 +31,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.wearable.DataApi;
 import com.google.android.gms.wearable.DataEvent;
 import com.google.android.gms.wearable.DataEventBuffer;
@@ -209,7 +211,7 @@ public class MainActivity extends AppCompatActivity implements DataApi.DataListe
             ((TextView) findViewById(R.id.textView2)).setText("每段休息时间长度（分钟）");
             mButton1.setText("应用设置");
             mButton2.setText("统计信息");
-            button3.setText("历史记录");
+             button3.setText("历史记录");
         }
         // Attention: 临时性屏蔽介绍页面！
         first = false;
@@ -273,6 +275,8 @@ public class MainActivity extends AppCompatActivity implements DataApi.DataListe
                                 PutDataRequest rRequest = rPutDataMapRequest.asPutDataRequest();
                                 Wearable.DataApi.putDataItem(mGoogleApiClient, rRequest);
                             });
+                    System.out.println("calling from p1");
+                    refreshStat2Watch();
                 }
                 /*
                 if (item.getUri().getPath().equals("/set-progress")) {
@@ -487,6 +491,52 @@ public class MainActivity extends AppCompatActivity implements DataApi.DataListe
         new AlertDialog.Builder(this).setTitle("Set Successful").setMessage(message2show).setPositiveButton("OK", null).show();
     }
 
+    private void refreshStat2Watch() {
+        SQLiteDatabase db = SQLiteDatabase.openDatabase(getFilesDir().getPath() + "/my_db.db", null, SQLiteDatabase.OPEN_READONLY);
+        String sql1 = "SELECT AVG(length) FROM records";
+        String sql2 = "SELECT count(*) FROM records WHERE";
+        sql2 += " year = " + new Date().getYear();
+        sql2 += " AND month = " + new Date().getMonth();
+        sql2 += " AND date = " + new Date().getDate();
+        System.out.println(sql1);
+        System.out.println(sql2);
+        Cursor cur = db.rawQuery(sql1, null);
+        cur.moveToFirst();
+        double length = cur.getDouble(0);
+        System.out.println(length);
+        cur.close();
+        cur = db.rawQuery(sql2, null);
+        cur.moveToFirst();
+        int count = cur.getInt(0);
+        cur.close();
+        db.close();
+
+        PutDataMapRequest putDataMapRequest1 = PutDataMapRequest.create("/set-new-today");
+        putDataMapRequest1.getDataMap().putInt("the-new-today", new Random().nextInt());
+        PutDataRequest request1 = putDataMapRequest1.asPutDataRequest();
+        Wearable.DataApi.putDataItem(mGoogleApiClient, request1)
+                .setResultCallback(dataItemResult -> System.out.println(".........1."));
+
+        putDataMapRequest1 = PutDataMapRequest.create("/set-new-today");
+        putDataMapRequest1.getDataMap().putInt("the-new-today", count);
+        request1 = putDataMapRequest1.asPutDataRequest();
+        Wearable.DataApi.putDataItem(mGoogleApiClient, request1)
+                .setResultCallback(dataItemResult -> System.out.println(".........2."));
+
+        PutDataMapRequest putDataMapRequest2 = PutDataMapRequest.create("/set-new-average");
+        putDataMapRequest2.getDataMap().putDouble("the-new-average", new Random().nextDouble());
+        PutDataRequest request2 = putDataMapRequest2.asPutDataRequest();
+        Wearable.DataApi.putDataItem(mGoogleApiClient, request2)
+                .setResultCallback(dataItemResult -> System.out.println(".........3."));
+
+        putDataMapRequest2 = PutDataMapRequest.create("/set-new-average");
+        putDataMapRequest2.getDataMap().putDouble("the-new-average", length);
+        request2 = putDataMapRequest2.asPutDataRequest();
+        Wearable.DataApi.putDataItem(mGoogleApiClient, request2)
+                .setResultCallback(dataItemResult -> System.out.println(".........4."));
+    }
+
+
     private boolean storeRecord(Date currDate, int length) {
         try {
             double lat = 0.00, lon = 0.00;
@@ -568,6 +618,8 @@ public class MainActivity extends AppCompatActivity implements DataApi.DataListe
             }
             if(currStatus == 'W') {
                 storeRecord(new Date(), (int)timeInSecond / 60);
+                System.out.println("calling from p2");
+                refreshStat2Watch();
                 // was " publishProgress(-2L); "
                 Message msg = mHandler.obtainMessage();
                 msg.what = 0;

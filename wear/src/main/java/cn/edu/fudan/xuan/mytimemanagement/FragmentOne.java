@@ -28,6 +28,7 @@ public class FragmentOne extends Fragment {
     private CircledImageView mProgress;
     private Button mButtonUpper, mButtonLower;
     private GoogleApiClient mGoogleApiClient;
+    private TheGridAdapter mGridAdapter;
 
     Handler mHandler = new Handler() {
         @Override
@@ -54,6 +55,13 @@ public class FragmentOne extends Fragment {
 
     public void setGoogleApiClient(GoogleApiClient googleApiClient) {
         this.mGoogleApiClient = googleApiClient;
+    }
+
+    public void setParentAdapter(TheGridAdapter theAdapter) {
+        this.mGridAdapter = theAdapter;
+        // for debug only
+        //mGridAdapter.setmAverage(2.33333);
+        //mGridAdapter.setmToday(666);
     }
     
     @Override
@@ -124,8 +132,8 @@ public class FragmentOne extends Fragment {
                             msg.what = 3;
                             msg.sendToTarget();
                         }
-                    }
-                    else if (item.getUri().getPath().equals("/set-progress")) {
+                    } else if (item.getUri().getPath().equals("/set-progress")) {
+                        System.out.println("set-progress");
                         DataMap dataMap = DataMapItem.fromDataItem(item).getDataMap();
                         float progress = dataMap.getFloat("the-num");
                         //mProgress.setProgress(progress);
@@ -134,6 +142,18 @@ public class FragmentOne extends Fragment {
                         if(msg.what <= 3)
                             msg.what = 4;
                         msg.sendToTarget();
+                    }
+                    //
+                    else if (item.getUri().getPath().equals("/set-new-today")) {
+                        System.out.println("the-new-today");
+                        DataMap dataMap = DataMapItem.fromDataItem(item).getDataMap();
+                        int thenum = dataMap.getInt("the-new-today");
+                        mGridAdapter.setmToday(thenum);
+                    } else if (item.getUri().getPath().equals("/set-new-average")) {
+                        System.out.println("the-new-average");
+                        DataMap dataMap = DataMapItem.fromDataItem(item).getDataMap();
+                        double thenum = dataMap.getDouble("the-new-average");
+                        mGridAdapter.setmAverage(thenum);
                     }
                 }
             }

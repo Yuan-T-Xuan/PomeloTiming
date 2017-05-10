@@ -3,32 +3,60 @@ package cn.edu.fudan.xuan.mytimemanagement;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Handler;
+import android.os.Message;
 import android.support.wearable.view.CardFragment;
 import android.support.wearable.view.FragmentGridPagerAdapter;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 
-public class TheGridAdapter extends FragmentGridPagerAdapter {
-    FragmentOne fragmentOne = new FragmentOne();
+class TheGridAdapter extends FragmentGridPagerAdapter {
+    private int mToday = 0;
+    private double mAverage = 0.0;
+
+    private Handler handler;
+
+    private FragmentOne fragmentOne = new FragmentOne();
+    private OtherFragment fragmentTwo = new OtherFragment();
+    private OtherFragment2 fragmentThree = new OtherFragment2();
 
     public TheGridAdapter(FragmentManager fm) {
         super(fm);
     }
 
-    public TheGridAdapter(FragmentManager fm, GoogleApiClient googleApiClient) {
+    TheGridAdapter(FragmentManager fm, GoogleApiClient googleApiClient, Handler handler) {
         super(fm);
         fragmentOne.setGoogleApiClient(googleApiClient);
+        fragmentOne.setParentAdapter(this);
+        this.handler = handler;
     }
 
-    public void callWhenConnected() {
+    void callWhenConnected() {
         fragmentOne.callWhenConnected();
+    }
+
+    void setmToday(int newval) {
+        System.out.println("here is 'setmToday'");
+        this.mToday = newval;
+        //fragmentTwo.setVal(this.mToday);
+        Message msg = handler.obtainMessage();
+        msg.what = -1 * this.mToday;
+        msg.sendToTarget();
+    }
+
+    void setmAverage(double newval) {
+        System.out.println("here is 'setmAverage'");
+        this.mAverage = newval;
+        fragmentThree.setVal(this.mAverage);
     }
 
     @Override
     public Fragment getFragment(int row, int col) {
         if(col == 0)
             return fragmentOne;
-        return CardFragment.create("A page", "Page " + col);
+        if(col == 1)
+            return fragmentTwo;
+        else
+            return fragmentThree;
     }
 
     @Override
@@ -41,3 +69,4 @@ public class TheGridAdapter extends FragmentGridPagerAdapter {
         return 3;
     }
 }
+

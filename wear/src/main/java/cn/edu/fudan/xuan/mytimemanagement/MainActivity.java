@@ -9,6 +9,7 @@ import android.support.wearable.view.GridViewPager;
 import android.support.wearable.view.WatchViewStub;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -28,6 +29,19 @@ public class MainActivity extends WearableActivity implements GoogleApiClient.Co
     private TheGridAdapter adapter;
     private GoogleApiClient mGoogleApiClient;
 
+    Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            //
+            if (msg.what <= 0)
+                ((TextView)findViewById(R.id.thetext1)).setText(" " + (-1 * msg.what) + " ");
+            else
+                // ...
+            //
+            super.handleMessage(msg);
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +58,7 @@ public class MainActivity extends WearableActivity implements GoogleApiClient.Co
         final WatchViewStub stub = (WatchViewStub) findViewById(R.id.watch_view_stub);
         stub.setOnLayoutInflatedListener((_stub) -> {
             pager = (GridViewPager)findViewById(R.id.thegrid);
-            adapter = new TheGridAdapter(getFragmentManager(), mGoogleApiClient);
+            adapter = new TheGridAdapter(getFragmentManager(), mGoogleApiClient, this.mHandler);
             pager.setAdapter(adapter);
         });
 
