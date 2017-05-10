@@ -21,6 +21,12 @@ public class OtherFragment extends Fragment {
     }
 
     @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        ((MainActivity)getActivity()).ttx1 = (TextView)getView().findViewById(R.id.thetext1);
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
         // ...

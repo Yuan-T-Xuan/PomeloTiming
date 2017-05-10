@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.wearable.view.CardFragment;
 import android.support.wearable.view.FragmentGridPagerAdapter;
+import android.util.Log;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 
@@ -38,15 +39,22 @@ class TheGridAdapter extends FragmentGridPagerAdapter {
         System.out.println("here is 'setmToday'");
         this.mToday = newval;
         //fragmentTwo.setVal(this.mToday);
+        if((-1 * this.mToday) >= 10000)
+            return;
         Message msg = handler.obtainMessage();
-        msg.what = -1 * this.mToday;
+        //msg.what = -1 * this.mToday;
+        msg.what = -666;
         msg.sendToTarget();
     }
 
     void setmAverage(double newval) {
         System.out.println("here is 'setmAverage'");
         this.mAverage = newval;
-        fragmentThree.setVal(this.mAverage);
+        //fragmentThree.setVal(this.mAverage);
+        Message msg = handler.obtainMessage();
+        msg.what = (int)(newval * 10000);
+        Log.d("This is msg.what", " " + msg.what);
+        msg.sendToTarget();
     }
 
     @Override

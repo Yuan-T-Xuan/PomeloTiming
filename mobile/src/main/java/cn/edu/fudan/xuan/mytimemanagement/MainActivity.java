@@ -513,16 +513,19 @@ public class MainActivity extends AppCompatActivity implements DataApi.DataListe
 
         PutDataMapRequest putDataMapRequest1 = PutDataMapRequest.create("/set-new-today");
         putDataMapRequest1.getDataMap().putInt("the-new-today", new Random().nextInt());
+        putDataMapRequest1.getDataMap().putDouble("the-new-avg", new Random().nextDouble());
         PutDataRequest request1 = putDataMapRequest1.asPutDataRequest();
         Wearable.DataApi.putDataItem(mGoogleApiClient, request1)
                 .setResultCallback(dataItemResult -> System.out.println(".........1."));
 
         putDataMapRequest1 = PutDataMapRequest.create("/set-new-today");
         putDataMapRequest1.getDataMap().putInt("the-new-today", count);
+        putDataMapRequest1.getDataMap().putDouble("the-new-avg", length);
         request1 = putDataMapRequest1.asPutDataRequest();
         Wearable.DataApi.putDataItem(mGoogleApiClient, request1)
                 .setResultCallback(dataItemResult -> System.out.println(".........2."));
 
+/*
         PutDataMapRequest putDataMapRequest2 = PutDataMapRequest.create("/set-new-average");
         putDataMapRequest2.getDataMap().putDouble("the-new-average", new Random().nextDouble());
         PutDataRequest request2 = putDataMapRequest2.asPutDataRequest();
@@ -534,6 +537,7 @@ public class MainActivity extends AppCompatActivity implements DataApi.DataListe
         request2 = putDataMapRequest2.asPutDataRequest();
         Wearable.DataApi.putDataItem(mGoogleApiClient, request2)
                 .setResultCallback(dataItemResult -> System.out.println(".........4."));
+                */
     }
 
 

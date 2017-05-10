@@ -148,13 +148,16 @@ public class FragmentOne extends Fragment {
                         System.out.println("the-new-today");
                         DataMap dataMap = DataMapItem.fromDataItem(item).getDataMap();
                         int thenum = dataMap.getInt("the-new-today");
+                        double thenum2 = dataMap.getDouble("the-new-avg");
                         mGridAdapter.setmToday(thenum);
-                    } else if (item.getUri().getPath().equals("/set-new-average")) {
+                        mGridAdapter.setmAverage(thenum2);
+                    } /*else if (item.getUri().getPath().equals("/set-new-average")) {
                         System.out.println("the-new-average");
                         DataMap dataMap = DataMapItem.fromDataItem(item).getDataMap();
                         double thenum = dataMap.getDouble("the-new-average");
                         mGridAdapter.setmAverage(thenum);
-                    }
+                    }*/
+                    
                 }
             }
         });

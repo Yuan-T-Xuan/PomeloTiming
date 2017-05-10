@@ -13,11 +13,17 @@ public class OtherFragment2 extends Fragment {
 
     public void setVal(double newVal) {
         this.val = newVal;
-        ((TextView)getActivity().findViewById(R.id.thetext1)).setText(String.format(" %.3f ", this.val));
+        ((TextView)(getActivity().findViewById(R.id.uglytext))).setText(String.format(" %.3f ", this.val));
     }
 
     public OtherFragment2() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        ((MainActivity)getActivity()).ttx2 = (TextView)getView().findViewById(R.id.uglytext);
     }
 
     @Override
