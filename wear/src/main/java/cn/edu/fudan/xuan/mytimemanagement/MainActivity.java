@@ -29,19 +29,13 @@ public class MainActivity extends WearableActivity implements GoogleApiClient.Co
     private TheGridAdapter adapter;
     private GoogleApiClient mGoogleApiClient;
 
-    public TextView ttx1, ttx2;
+    public TextView ttx1;
 
     Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            //
             if (msg.what <= 0)
                 ttx1.setText(" " + (-1 * msg.what) + " ");
-            if (msg.what >= 10000) {
-                System.out.println("Got it in handler case 2");
-                ttx2.setText(String.format(" %.2f ", (double) msg.what / 10000.0));
-            }
-            //
             super.handleMessage(msg);
         }
     };

@@ -59,9 +59,6 @@ public class FragmentOne extends Fragment {
 
     public void setParentAdapter(TheGridAdapter theAdapter) {
         this.mGridAdapter = theAdapter;
-        // for debug only
-        //mGridAdapter.setmAverage(2.33333);
-        //mGridAdapter.setmToday(666);
     }
     
     @Override
@@ -102,7 +99,7 @@ public class FragmentOne extends Fragment {
         return inflater.inflate(R.layout.fragment_one, container, false);
     }
 
-    private void sendWatchConnectedMessage() {
+    public void sendWatchConnectedMessage() {
         PutDataMapRequest putDataMapRequest = PutDataMapRequest.create("/watch-connected");
         putDataMapRequest.getDataMap().putInt("watch-connected", new Random().nextInt());
         PutDataRequest request = putDataMapRequest.asPutDataRequest();
@@ -148,15 +145,8 @@ public class FragmentOne extends Fragment {
                         System.out.println("the-new-today");
                         DataMap dataMap = DataMapItem.fromDataItem(item).getDataMap();
                         int thenum = dataMap.getInt("the-new-today");
-                        double thenum2 = dataMap.getDouble("the-new-avg");
                         mGridAdapter.setmToday(thenum);
-                        mGridAdapter.setmAverage(thenum2);
-                    } /*else if (item.getUri().getPath().equals("/set-new-average")) {
-                        System.out.println("the-new-average");
-                        DataMap dataMap = DataMapItem.fromDataItem(item).getDataMap();
-                        double thenum = dataMap.getDouble("the-new-average");
-                        mGridAdapter.setmAverage(thenum);
-                    }*/
+                    }
                     
                 }
             }

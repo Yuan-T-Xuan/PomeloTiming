@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 public class OtherFragment extends Fragment {
 
+    public FragmentOne ff;
+
     private int val = -1;
 
     public void setVal(int newVal) {
@@ -29,7 +31,7 @@ public class OtherFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        // ...
+        ff.sendWatchConnectedMessage();
     }
 
     @Override
